@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../css/data.css";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+
+
+
+
+
 
 interface DataProps {
   searchValue: string;
@@ -25,46 +32,64 @@ interface Book {
 }
 
 const Data: React.FC<DataProps> = (props) => {
-
   const searchValue = props.searchValue;
-  const setSearchValue = props.setSearchValue;
- 
-
- 
-
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchResults, setSearchResults] = useState<Book[]>();
   const API_KEY = 'AIzaSyC7WGg2plr_s_btmyrSw4IIGDS7ptIWZJk';
-  const maxResults = 21;
+  const maxResults = 32;
   let query = 'subject:fantasy';
 
-  
+  const Price = [45, 100, 100, 120, 95, 75, 85, 25, 30, 45, 55, 88, 77, 99, 44, 55, 22, 44, 65, 75, 65,45,55,85,90,70,50,55,65,90,55,45];
 
   useEffect(() => {
-    
-  
     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&key=${API_KEY}`;
-  
+
     fetch(apiUrl)
       .then((response) => response.json() as Promise<{ items: Book[] }>)
       .then((data) => {
-        const books = data.items;
+        const books = data.items.map((book, index) => {
+          const price = Price[index] || 'N/A';
+          book.saleInfo = {
+            listPrice: {
+              amount: price.toString(),
+            },
+          };
+          return book;
+        });
+
         const filteredBooks = books.filter((book) =>
-        book.volumeInfo.title.toLowerCase().includes(searchValue.toLowerCase())
-    );
-    setSearchResults(filteredBooks);
+          book.volumeInfo.title.toLowerCase().includes(searchValue.toLowerCase())
+        );
+
+        setSearchResults(filteredBooks);
       })
       .catch((error) => {
         console.error('An error occurred:', error);
       });
   }, [searchValue]);
+
+
+  const itemsPerPage = 12;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = searchResults?.slice(startIndex, endIndex);
+  const pageCount = Math.ceil((searchResults?.length || 0) / itemsPerPage)
+
+  const handlePageClick = (data: { selected: number }) => {
+    setCurrentPage(data.selected + 1);
+  };
   
+
+
+ 
 
   return (
     <div className=''>
-      <div id='book-card' className='grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 '>
-        {searchResults && searchResults.length > 0 ? (
-          searchResults.map((book, index) => (
-            <div className='p-5 h-[600px] border relative m-4' key={index}>
+      <div id='book-card' className='grid md:grid-cols-2 mx-10 sm:grid-cols-1 lg:grid-cols-4 '>
+        {currentItems && currentItems.length  > 0 ? (
+           currentItems.map((book, index) => (
+            <div className='p-5 h-[600px]   border relative m-4' key={index}>
               <h1 className="text-lg ">{book.volumeInfo.title}</h1>
               <img
                 id='img-book'
@@ -74,8 +99,8 @@ const Data: React.FC<DataProps> = (props) => {
               />
               <p>Author: {book.volumeInfo.authors.join(', ')}</p>
               <p>Page Count: {book.volumeInfo.pageCount}</p>
-              <p>Price: {book.saleInfo.listPrice ? book.saleInfo.listPrice.amount : 'N/A'}</p>
-              <div className='absolute left-0 py-2 hover:bg-orange-500 bottom-0 w-full bg-orange-600'>
+              <p>Price: {book.saleInfo.listPrice ? book.saleInfo.listPrice.amount : 'N/A'} TL</p>
+              <div className='absolute left-0 py-2 hover-bg-orange-500 bottom-0 w-full bg-orange-600'>
                 <Link className='text-white text-xl flex items-center justify-center' to="/sepet">
                    <p>Sepete Ekle</p> 
                 </Link>
@@ -85,7 +110,16 @@ const Data: React.FC<DataProps> = (props) => {
         ) : (
           <p>No results found</p>
         )}
+    <Stack spacing={2}>
+      <Pagination count={pageCount}
+       variant="outlined"
+       onChange={(event, page) => handlePageClick({ selected: page - 1 })}
+        />
+      
+    </Stack>
       </div>
+   
+
     </div>
   );
 };
