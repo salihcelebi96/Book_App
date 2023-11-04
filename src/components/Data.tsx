@@ -100,7 +100,7 @@ const Data: React.FC<DataProps> = (props) => {
               <p>Author: {book.volumeInfo.authors.join(', ')}</p>
               <p>Page Count: {book.volumeInfo.pageCount}</p>
               <p>Price: {book.saleInfo.listPrice ? book.saleInfo.listPrice.amount : 'N/A'} TL</p>
-              <div className='absolute left-0 py-2 hover-bg-orange-500 bottom-0 w-full bg-orange-600'>
+              <div className='absolute left-0 py-2 hover:bg-orange-500 bottom-0 w-full bg-orange-600'>
                 <Link className='text-white text-xl flex items-center justify-center' to="/sepet">
                    <p>Sepete Ekle</p> 
                 </Link>
