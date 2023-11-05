@@ -1,10 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom'; // react-dom/client yerine react-dom kullanın
+import App from './App.jsx'; // .jsx uzantısını kullanın
+import './index.css';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+ReactDOM.render(
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
-)
+  </Provider>,
+  document.getElementById('root')
+);

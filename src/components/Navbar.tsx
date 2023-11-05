@@ -43,24 +43,24 @@ const Navbar = () => {
       ) : (
 
         <nav className='w-screen relative'>
-          <ul className='flex w-full justify-around sm:gap-10 lg:gap-10 items-center h-16 bg-blue-700 text-white lg:text-2xl sm:text-xl'>
+          <ul className='flex w-full justify-around sm:gap-10 lg:gap-10 items-center h-16 bg-blue-900 text-white lg:text-2xl sm:text-xl'>
             <div className='flex gap-10 justify-center'>
               <li>
                 <Link className="navbar-link" to="/">Home</Link>
               </li>
               <li>
-                <Link className="navbar-link" to="/doctors">Books</Link>
+                <Link className="navbar-link" to="/about">Hakkımızda</Link>
               </li>
               <li>
-                <Link className="navbar-link" to="/about">Random</Link>
+                <Link className="navbar-link" to="/sepet">Sepetim</Link>
               </li>
             </div>
 
 
 
-            <div className='absolute right-8'>
+            <div className='absolute right-10 border p-2 rounded-2xl bg-green-600 '>
               <li>
-                <Link className="navbar-link" to="/iletisim">Contact</Link>
+                <Link className="navbar-link  " to="/iletisim">Contact</Link>
               </li>
             </div>
 

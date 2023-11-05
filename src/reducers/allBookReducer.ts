@@ -26,8 +26,8 @@ const booksSlice = createSlice({
     },
   });
   
-  // Export the action creators
+  
   export const { addBook, deleteBook } = booksSlice.actions;
   
-  // Export the reducer
+  
   export default booksSlice.reducer;

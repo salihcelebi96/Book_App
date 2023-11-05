@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import "../css/data.css";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { useDispatch } from 'react-redux';
+
 
 
 
@@ -32,6 +34,7 @@ interface Book {
 }
 
 const Data: React.FC<DataProps> = (props) => {
+  const dispatch = useDispatch();
   const searchValue = props.searchValue;
   const [currentPage, setCurrentPage] = useState(1);
   const [searchResults, setSearchResults] = useState<Book[]>();
@@ -85,7 +88,7 @@ const Data: React.FC<DataProps> = (props) => {
  
 
   return (
-    <div className=''>
+    <div className='relative '>
       <div id='book-card' className='grid md:grid-cols-2 mx-10 sm:grid-cols-1 lg:grid-cols-4 '>
         {currentItems && currentItems.length  > 0 ? (
            currentItems.map((book, index) => (
@@ -110,13 +113,15 @@ const Data: React.FC<DataProps> = (props) => {
         ) : (
           <p>No results found</p>
         )}
-    <Stack spacing={2}>
-      <Pagination count={pageCount}
-       variant="outlined"
-       onChange={(event, page) => handlePageClick({ selected: page - 1 })}
-        />
-      
-    </Stack>
+  <div className="w-screen flex justify-center">
+        <Stack className='' spacing={2}>
+          <Pagination
+            count={pageCount}
+            variant="outlined"
+            onChange={(event, page) => handlePageClick({ selected: page - 1 })}
+          />
+        </Stack>
+      </div>
       </div>
    
 

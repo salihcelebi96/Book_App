@@ -24,7 +24,7 @@ const Menu: React.FC = () => {
     },[]);
 
     return (
-        <div className='w-screen h-12 flex justify-between  bg-blue-700'>
+        <div className='w-screen h-12 flex justify-between  bg-blue-900'>
             <div className='p-5 text-white' onClick={handleMenuToggle}>
                 <AiOutlineMenu />
                 
@@ -47,10 +47,10 @@ const Menu: React.FC = () => {
                     </nav>
                 </div>
             )}
-            <div className='text-white a list-none gap-5 pr-10 flex items-center justify-center'>
+            <div className='text-white a list-none gap-5 pr-10     flex    items-center justify-center'>
                 
                 <div>
-                    <li>
+                    <li className=''>
                         <Link className="navbar-link" to="/iletisim">Contact</Link>
                     </li>
                 </div>
