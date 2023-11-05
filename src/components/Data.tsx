@@ -4,12 +4,8 @@ import "../css/data.css";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { useDispatch } from 'react-redux';
-
-
-
-
-
-
+import { addBook } from '../reducers/allBookReducer';
+import { addBasket } from '../reducers/sepetReducers';
 
 interface DataProps {
   searchValue: string;
@@ -64,6 +60,10 @@ const Data: React.FC<DataProps> = (props) => {
           book.volumeInfo.title.toLowerCase().includes(searchValue.toLowerCase())
         );
 
+        filteredBooks.forEach((book) => {
+          dispatch(addBook(book));
+        });
+
         setSearchResults(filteredBooks);
       })
       .catch((error) => {
@@ -71,27 +71,30 @@ const Data: React.FC<DataProps> = (props) => {
       });
   }, [searchValue]);
 
-
   const itemsPerPage = 12;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = searchResults?.slice(startIndex, endIndex);
-  const pageCount = Math.ceil((searchResults?.length || 0) / itemsPerPage)
+  const pageCount = Math.ceil((searchResults?.length || 0) / itemsPerPage);
 
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected + 1);
   };
-  
 
+  const handleBasket = (bookIndex: number) => {
+    const selectedBook = currentItems && currentItems[bookIndex];
 
- 
+    if (selectedBook) {
+      dispatch(addBasket(selectedBook));
+    }
+  };
 
   return (
     <div className='relative '>
       <div id='book-card' className='grid md:grid-cols-2 mx-10 sm:grid-cols-1 lg:grid-cols-4 '>
         {currentItems && currentItems.length  > 0 ? (
-           currentItems.map((book, index) => (
+          currentItems.map((book, index) => (
             <div className='p-5 h-[600px]   border relative m-4' key={index}>
               <h1 className="text-lg ">{book.volumeInfo.title}</h1>
               <img
@@ -105,7 +108,7 @@ const Data: React.FC<DataProps> = (props) => {
               <p>Price: {book.saleInfo.listPrice ? book.saleInfo.listPrice.amount : 'N/A'} TL</p>
               <div className='absolute left-0 py-2 hover:bg-orange-500 bottom-0 w-full bg-orange-600'>
                 <Link className='text-white text-xl flex items-center justify-center' to="/sepet">
-                   <p>Sepete Ekle</p> 
+                  <p onClick={() => handleBasket(index)}>Sepete Ekle</p>
                 </Link>
               </div>
             </div>
@@ -113,18 +116,16 @@ const Data: React.FC<DataProps> = (props) => {
         ) : (
           <p>No results found</p>
         )}
-  <div className="w-screen flex justify-center">
-        <Stack className='' spacing={2}>
-          <Pagination
-            count={pageCount}
-            variant="outlined"
-            onChange={(event, page) => handlePageClick({ selected: page - 1 })}
-          />
-        </Stack>
+        <div className="w-screen flex justify-center">
+          <Stack className='' spacing={2}>
+            <Pagination
+              count={pageCount}
+              variant="outlined"
+              onChange={(event, page) => handlePageClick({ selected: page - 1 })}
+            />
+          </Stack>
+        </div>
       </div>
-      </div>
-   
-
     </div>
   );
 };

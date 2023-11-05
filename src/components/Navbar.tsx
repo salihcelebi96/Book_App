@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className='flex gap-10 items-center'>
+      <div className='flex gap-10 px-10 items-center'>
         <img className='h-24' src={book} alt="" />
         <Link className='text-4xl font-serif text-blue-500' to="/">KitapEvim</Link>
       </div>
@@ -49,10 +49,10 @@ const Navbar = () => {
                 <Link className="navbar-link" to="/">Home</Link>
               </li>
               <li>
-                <Link className="navbar-link" to="/about">Hakkımızda</Link>
+                <Link className="navbar-link" to="/about">About</Link>
               </li>
               <li>
-                <Link className="navbar-link" to="/sepet">Sepetim</Link>
+                <Link className="navbar-link" to="/sepet">My Basket</Link>
               </li>
             </div>
 

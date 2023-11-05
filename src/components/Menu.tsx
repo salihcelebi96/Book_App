@@ -30,17 +30,17 @@ const Menu: React.FC = () => {
                 
             </div>
             {menuOpen && (
-                <div className='w-screen' ref={menuRef}>
-                    <nav className='w-screen '>
-                        <ul className='flex w-1/5 p-5 text-sm list-disc  h-30 flex-col  gap-3 sm:gap-10 lg:gap-10 bg-blue-700 text-white lg:text-2xl sm:text-xl'>
-                            <li>
-                                <Link className="navbar-link" to="/">Home</Link>
+                <div className='w-screen z-10' ref={menuRef}>
+                    <nav className='w-screen z-10'>
+                        <ul className='flex z-10  w-1/5 p-5 text-sm list-disc  h-30 flex-col  gap-3 sm:gap-10 lg:gap-10 bg-blue-900 text-white lg:text-2xl sm:text-xl'>
+                            <li className='z-10'>
+                                <Link className="navbar-link z-10" to="/">Home</Link>
                             </li>
-                            <li>
-                                <Link className="navbar-link" to="/doctors">Books</Link>
+                            <li className='z-10'>
+                                <Link className="navbar-link z-10" to="/about">About</Link>
                             </li>
-                            <li>
-                                <Link className="navbar-link" to="/about">Random</Link>
+                            <li className='z-10'>
+                                <Link className="navbar-link z-10" to="/sepet">My Basket</Link>
                             </li>
 
                         </ul>
