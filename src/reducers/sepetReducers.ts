@@ -3,8 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 interface Book {
+  id: string; // Yeni eklenen 'id' özelliği
   volumeInfo: {
-    id: string;
     title: string;
     authors: string[];
     pageCount: number;
@@ -19,6 +19,7 @@ interface Book {
   };
 }
 
+
 const initialState: Book[] = [];
 
 // Create a books slice using createSlice
@@ -30,7 +31,7 @@ const sepetSlice = createSlice({
         state.push(action.payload);
       },
       deleteBasket: (state, action: PayloadAction<string>) => {
-        return state.filter((book) => book.volumeInfo.id !== action.payload);
+        return state.filter((book) => book.id !== action.payload);
       },
     },
   });

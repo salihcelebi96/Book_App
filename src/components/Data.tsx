@@ -13,8 +13,8 @@ interface DataProps {
 }
 
 interface Book {
+  id: string; // id özelliği eklendi
   volumeInfo: {
-    id: string;
     title: string;
     authors: string[];
     pageCount: number;
@@ -28,6 +28,10 @@ interface Book {
     } | null;
   };
 }
+
+
+
+
 
 const Data: React.FC<DataProps> = (props) => {
   const dispatch = useDispatch();
@@ -45,6 +49,7 @@ const Data: React.FC<DataProps> = (props) => {
 
     fetch(apiUrl)
       .then((response) => response.json() as Promise<{ items: Book[] }>)
+      
       .then((data) => {
         const books = data.items.map((book, index) => {
           const price = Price[index] || 'N/A';
@@ -53,6 +58,7 @@ const Data: React.FC<DataProps> = (props) => {
               amount: price.toString(),
             },
           };
+          
           return book;
         });
 
@@ -75,20 +81,25 @@ const Data: React.FC<DataProps> = (props) => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentItems = searchResults?.slice(startIndex, endIndex);
+  const currentItems: Book[] | undefined = searchResults?.slice(startIndex, endIndex);
+
   const pageCount = Math.ceil((searchResults?.length || 0) / itemsPerPage);
 
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected + 1);
   };
 
-  const handleBasket = (bookIndex: number) => {
-    const selectedBook = currentItems && currentItems[bookIndex];
-
-    if (selectedBook) {
-      dispatch(addBasket(selectedBook));
+  const handleBasket = (book: Book) => {
+    if (currentItems) {
+      const selectedBook = currentItems.find(item => item.id === book.id);
+       console.log(selectedBook)
+      if (selectedBook) {
+        dispatch(addBasket(selectedBook));
+      }
     }
   };
+  
+  
 
   return (
     <div className='relative '>
@@ -107,8 +118,8 @@ const Data: React.FC<DataProps> = (props) => {
               <p>Page Count: {book.volumeInfo.pageCount}</p>
               <p>Price: {book.saleInfo.listPrice ? book.saleInfo.listPrice.amount : 'N/A'} TL</p>
               <div className='absolute left-0 py-2 hover:bg-orange-500 bottom-0 w-full bg-orange-600'>
-                <Link className='text-white text-xl flex items-center justify-center' to="/sepet">
-                  <p onClick={() => handleBasket(index)}>Sepete Ekle</p>
+                <Link onClick={() => handleBasket(book)} className='text-white text-xl flex items-center justify-center' to="/sepet">
+                  <p >Sepete Ekle</p>
                 </Link>
               </div>
             </div>

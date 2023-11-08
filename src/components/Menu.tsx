@@ -1,7 +1,7 @@
 import React, { useState,useRef, useEffect } from 'react';
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { BsSearch } from "react-icons/bs";
+
 
 const Menu: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);

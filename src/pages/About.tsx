@@ -3,14 +3,20 @@ import team1 from "../assets/team1.jpg";
 import team2 from "../assets/team2.jpg";
 import team3 from "../assets/team3.jpg";
 
+
 const CareerCard: React.FC = () => {
+
+
+
+
+
   return (
     <div className='my-5'>
       <div className="text-center mt-5 text-2xl">
         Yönetim Kurulu
       </div>
-      <div className="grid lg:grid-cols-3 sm:grid-cols-1 justify-center">
-        <div className="m-4 w-[500px]">
+      <div className="grid  lg:grid-cols-3 sm:grid-cols-1 justify-center">
+        <div className="m-4 border p-10 rounded-lg w-[500px]">
           <img src={team1} alt="Gizem Çoban" />
           <div className='flex flex-col items-center gap-1 mt-2'>
             <p>Gizem Çoban</p>
@@ -25,7 +31,7 @@ const CareerCard: React.FC = () => {
             </p>
           </div>
         </div>
-        <div className="m-4 w-[500px]">
+        <div className="m-4 border p-10 rounded-lg w-[500px]">
           <img src={team3} alt="Ahmet Çoban" />
           <div className='flex flex-col items-center gap-1 mt-2'>
             <p>Ahmet Çoban</p>
@@ -40,7 +46,7 @@ const CareerCard: React.FC = () => {
             </p>
           </div>
         </div>
-        <div className="m-4 w-[500px]">
+        <div className="m-4 border p-10 rounded-lg w-[500px]">
           <img src={team2} alt="Veli Çoban" />
           <div className='flex flex-col items-center gap-1 mt-2'>
             <p>Veli Çoban</p>

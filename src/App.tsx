@@ -6,6 +6,7 @@ import Sepet from "./pages/SepetPage";
 import Navbar from "./components/Navbar";
 import About from "./pages/About";
 import DarkMode from "./components/DarkMode";
+import Payment from "./pages/Payment";
 
 
 
@@ -29,6 +30,8 @@ function App() {
           <Route  path='/' element={<Home/>}  />
           <Route  path='/sepet' element={<Sepet/>}  />
           <Route  path='/about' element={<About/>}    />
+          <Route  path='/payment' element={<Payment/>}    />
+
         </Routes>
       </Router>
 
