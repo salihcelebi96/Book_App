@@ -4,18 +4,18 @@ import visa from "../assets/visa.svg"
 import { Link } from "react-router-dom"
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { useDispatch } from 'react-redux';
+
 import { toast } from 'react-toastify';
 
 
 
 
 const PaymentPage = () => {
-    const basket = useSelector((state:RootState) => state.basket);
+    
     const price = useSelector((state: RootState) => state.price);
     console.log(price)
 
-    const dispatch = useDispatch();
+    
     
 
   const [cardNumber, setCardNumber] = useState('');
