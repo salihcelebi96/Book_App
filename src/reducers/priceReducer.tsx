@@ -18,7 +18,7 @@ const pricesSlice = createSlice({
       const { bookId, price } = action.payload;
       state[bookId] = price;
     },
-    clearPrices: (state) => {
+    clearPrices: () => {
         return {};
       },
   },
