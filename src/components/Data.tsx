@@ -13,9 +13,9 @@ interface DataProps {
 }
 
 interface Book {
-  id: string; 
+  id: string;
   volumeInfo: {
-    id: string;  
+    id: string;
     title: string;
     authors: string[];
     pageCount: number;
@@ -43,14 +43,14 @@ const Data: React.FC<DataProps> = (props) => {
   const maxResults = 32;
   let query = 'subject:fantasy';
 
-  const Price = [45, 100, 100, 120, 95, 75, 85, 25, 30, 45, 55, 88, 77, 99, 44, 55, 22, 44, 65, 75, 65,45,55,85,90,70,50,55,65,90,55,45];
+  const Price = [45, 100, 100, 120, 95, 75, 85, 25, 30, 45, 55, 88, 77, 99, 44, 55, 22, 44, 65, 75, 65, 45, 55, 85, 90, 70, 50, 55, 65, 90, 55, 45];
 
   useEffect(() => {
     const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${maxResults}&key=${API_KEY}`;
 
     fetch(apiUrl)
       .then((response) => response.json() as Promise<{ items: Book[] }>)
-      
+
       .then((data) => {
         const books = data.items.map((book, index) => {
           const price = Price[index] || 'N/A';
@@ -59,7 +59,7 @@ const Data: React.FC<DataProps> = (props) => {
               amount: price.toString(),
             },
           };
-          
+
           return book;
         });
 
@@ -67,7 +67,7 @@ const Data: React.FC<DataProps> = (props) => {
           book.volumeInfo.title.toLowerCase().includes(searchValue.toLowerCase())
         );
 
-        filteredBooks.forEach((book : Book) => {
+        filteredBooks.forEach((book: Book) => {
           dispatch(addBook(book));
         });
 
@@ -93,21 +93,21 @@ const Data: React.FC<DataProps> = (props) => {
   const handleBasket = (book: Book) => {
     if (currentItems) {
       const selectedBook = currentItems.find(item => item.id === book.id);
-       console.log(selectedBook)
+      console.log(selectedBook)
       if (selectedBook) {
         dispatch(addBasket(selectedBook));
       }
     }
   };
-  
-  
+
+
 
   return (
     <div className='relative '>
       <div id='book-card' className='grid md:grid-cols-2 mx-10 sm:grid-cols-1   lg:grid-cols-3  xl:grid-cols-4 '>
-        {currentItems && currentItems.length  > 0 ? (
+        {currentItems && currentItems.length > 0 ? (
           currentItems.map((book, index) => (
-            <div className='p-5 bg-black border relative m-4   h-auto  '  key={index}>
+            <div className='p-5  border relative m-4   h-auto  ' key={index}>
               <h1 className="text-lg ">{book.volumeInfo.title}</h1>
               <img
                 id='img-book'
@@ -133,8 +133,9 @@ const Data: React.FC<DataProps> = (props) => {
             <Pagination
               count={pageCount}
               variant="outlined"
-              onChange={(event, page) => handlePageClick({ selected: page - 1 })}
+              onChange={(_, page) => handlePageClick({ selected: page - 1 })}
             />
+
           </Stack>
         </div>
       </div>
