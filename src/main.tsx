@@ -1,4 +1,4 @@
-import React from 'react';
+
 import ReactDOM from 'react-dom'; // react-dom/client yerine react-dom kullanın
 import App from './App.jsx'; // .jsx uzantısını kullanın
 import './index.css';
