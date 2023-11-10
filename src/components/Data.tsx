@@ -13,8 +13,9 @@ interface DataProps {
 }
 
 interface Book {
-  id: string; // id özelliği eklendi
+  id: string; 
   volumeInfo: {
+    id: string;  
     title: string;
     authors: string[];
     pageCount: number;
@@ -66,7 +67,7 @@ const Data: React.FC<DataProps> = (props) => {
           book.volumeInfo.title.toLowerCase().includes(searchValue.toLowerCase())
         );
 
-        filteredBooks.forEach((book) => {
+        filteredBooks.forEach((book : Book) => {
           dispatch(addBook(book));
         });
 

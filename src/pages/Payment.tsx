@@ -4,10 +4,18 @@ import visa from "../assets/visa.svg"
 import { Link } from "react-router-dom"
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+
+
 
 
 const PaymentPage = () => {
-    const basket = useSelector((state:RootState) => state.basket)
+    const basket = useSelector((state:RootState) => state.basket);
+    const price = useSelector((state: RootState) => state.price);
+    console.log(price)
+
+    const dispatch = useDispatch();
     
 
   const [cardNumber, setCardNumber] = useState('');
@@ -16,6 +24,7 @@ const PaymentPage = () => {
   const [cardholderName, setCardholderName] = useState('');
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
+  
 
   const validateEmail = (email:string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,6 +53,8 @@ const PaymentPage = () => {
     setCardNumber(formattedInput);
   };
 
+
+
   const handlePaymentSubmit = () => {
     console.log('Payment Information:', {
       email,
@@ -52,7 +63,12 @@ const PaymentPage = () => {
       cvv,
       cardholderName,
     });
+    toast.success('Siparişiniz Alınmıştır !', {
+      position: 'top-right', 
+      autoClose: 4000, 
+    });
   };
+  
 
   const isFormValid = () => {
     return (
@@ -60,7 +76,8 @@ const PaymentPage = () => {
       cardNumber !== '' &&
       expiryDate !== '' &&
       cvv !== '' &&
-      cardholderName !== ''
+      cardholderName !== '' 
+     
     );
   };
 
@@ -119,7 +136,7 @@ const PaymentPage = () => {
             name="expiryDate"
             value={expiryDate}
             onChange={handleExpiryDateChange}
-            maxLength={19}
+            maxLength={5}
             pattern="\d\d/\d{4}"
             placeholder="MM/YYYY"
             required
@@ -133,25 +150,32 @@ const PaymentPage = () => {
           <label>Cardholder Name :</label>
           <input className='border rounded-md text-black' type="text" name="cardholderName" value={cardholderName} onChange={(e) => setCardholderName(e.target.value)} />
         </div>
-        <div className='flex flex-col'>
-          <label className='flex justify-center text-red-700'>Total Price :</label>
-          <div className='text-green-600 '>  </div>
+        
+        <div className='flex flex-col'> 
+          <label className='flex justify-center text-red-700'>Total Price:</label>
+          {Object.keys(price).map((productId) => (
+            <div key={productId}>
+              
+              <p>Price: {price[productId]}</p>
+            </div>
+          ))}
         </div>
         <div>
           {isFormValid() ? (
             <Link
-              to="/ordered"
+              to="/"
               className='text-white border bg-gray-700 hover:bg-gray-600 px-2 rounded-md p-1 font-bold'
               onClick={handlePaymentSubmit}
             >
               Submit Payment
             </Link>
           ) : (
-            <div className='text-white border bg-gray-700 opacity-50 cursor-not-allowed px-2 rounded-md p-1 font-bold'>
+            <div  className='text-white border bg-gray-700 opacity-50 cursor-not-allowed px-2 rounded-md p-1 font-bold'>
               Submit Payment
             </div>
           )}
         </div>
+       
       </div>
     </div>
   )

@@ -9,7 +9,7 @@ const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Tarayıcı penceresinin boyutunu izleyin ve uygunluğu kontrol edin
+    
     const handleResize = () => {
       if (window.innerWidth < 640) {
         setIsMobile(true);
@@ -18,14 +18,14 @@ const Navbar = () => {
       };
     };
 
-    // Başlangıçta ve boyut değişikliklerinde çalışacak bir dinleyici ekleyin
+    
     window.addEventListener('resize', handleResize);
 
-    // İlk yüklemede duruma göre ayarlamak için
+    
     handleResize();
 
     return () => {
-      // Temizlik için dinleyiciyi kaldırın
+     
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -38,7 +38,7 @@ const Navbar = () => {
       </div>
 
       {isMobile ? (
-        // isMobile true ise Menu bileşenini göster
+       
         <Menu />
       ) : (
 

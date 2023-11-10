@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 interface Book {
-  id: string; // Yeni eklenen 'id' özelliği
+  id: string; 
   volumeInfo: {
     title: string;
     authors: string[];

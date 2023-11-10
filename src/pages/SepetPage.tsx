@@ -5,10 +5,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { deleteBasket } from '../reducers/sepetReducers';
 import { useDispatch } from 'react-redux';
+import {setPrice} from "../reducers/priceReducer";
+import {clearPrices} from "../reducers/priceReducer";
 
 
 interface Book {
-  id: string; // Yeni eklenen 'id' özelliği
+  id: string; 
   volumeInfo: {
     title: string;
     authors: string[];
@@ -33,7 +35,14 @@ const SepetPage: React.FC = () => {
   const dispatch = useDispatch();
 
 
-  
+  const handleUpdatePrice = (bookId: string, newPrice: number) => {
+    const shippingPrice = 20;
+    dispatch(clearPrices());
+    const totalPrice = newPrice < 100 ? newPrice + shippingPrice:newPrice;
+    dispatch(setPrice({ bookId, price: totalPrice }));
+    
+  };
+
 
 
 
@@ -64,7 +73,7 @@ const SepetPage: React.FC = () => {
                 <p>Page Count: {book.volumeInfo.pageCount}</p>
                 <p>Price: {book.saleInfo?.listPrice?.amount || 'N/A'} TL</p>
                 <div className='absolute left-0 flex h-10 hover:bg-orange-500 bottom-0 w-full cursor-pointer bg-orange-600'>
-                  <Link className='text-white w-1/2 bg-green-600 hover:bg-green-500 text-xl flex items-center justify-center' to="/payment">
+                  <Link  onClick={() => { handleUpdatePrice(book.id, parseInt(book.saleInfo?.listPrice?.amount || '0')) }}  className='text-white w-1/2 bg-green-600 hover:bg-green-500 text-xl flex items-center justify-center' to="/payment">
                     Satın Al
                   </Link>
                   <div onClick={() => {dispatch(deleteBasket(book.id))}} className='text-white w-1/2 h-full bg-red-600 hover-bg-red-400 cursor-pointer text-xl flex items-center justify-center'>
