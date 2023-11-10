@@ -104,10 +104,10 @@ const Data: React.FC<DataProps> = (props) => {
 
   return (
     <div className='relative '>
-      <div id='book-card' className='grid md:grid-cols-2 mx-10 sm:grid-cols-1 lg:grid-cols-4 '>
+      <div id='book-card' className='grid md:grid-cols-2 mx-10 sm:grid-cols-1   lg:grid-cols-3  xl:grid-cols-4 '>
         {currentItems && currentItems.length  > 0 ? (
           currentItems.map((book, index) => (
-            <div className='p-5 h-[600px]   border relative m-4' key={index}>
+            <div className='p-5 bg-black border relative m-4   h-auto  '  key={index}>
               <h1 className="text-lg ">{book.volumeInfo.title}</h1>
               <img
                 id='img-book'
