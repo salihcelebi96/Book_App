@@ -20,7 +20,7 @@ const DarkMode:React.FC = () => {
     <DayNightToggle
       onChange={() => setIsDarkMode(!isDarkMode)}
       checked={isDarkMode}
-      className='absolute top-0 right-0'
+      className='absolute  top-0 right-0'
     />
   )
 }
