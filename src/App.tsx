@@ -9,6 +9,7 @@ import DarkMode from "./components/DarkMode";
 import Payment from "./pages/Payment";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Contact from './pages/Contact';
 
 
 
@@ -35,6 +36,8 @@ function App() {
           <Route  path='/sepet' element={<Sepet/>}  />
           <Route  path='/about' element={<About/>}    />
           <Route  path='/payment' element={<Payment/>}    />
+          <Route  path='/contact' element={<Contact/>} />
+
 
         </Routes>
       </Router>

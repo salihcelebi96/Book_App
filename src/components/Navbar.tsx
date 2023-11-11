@@ -60,7 +60,7 @@ const Navbar = () => {
 
             <div className='absolute right-10 border p-2 rounded-2xl bg-green-600 '>
               <li>
-                <Link className="navbar-link  " to="/iletisim">Contact</Link>
+                <Link className="navbar-link " to="/contact">Contact</Link>
               </li>
             </div>
 
