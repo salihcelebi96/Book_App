@@ -3,6 +3,7 @@ import "../css/navbar.css";
 import book from "../assets/book.png";
 import Menu from "./Menu";
 import { useEffect, useState } from 'react';
+import DarkMode from './DarkMode';
 
 
 const Navbar = () => {
@@ -32,10 +33,19 @@ const Navbar = () => {
 
   return (
     <div className='w-screen '>
-      <div className='flex gap-7 px-10 h-20 items-center'>
+      <div  className='flex justify-between relative  items-center'>
+       <div className='flex gap-7   px-10 h-20 items-center'>
         <img  className="h-16 w-16 " src={book} alt="" />
         <Link className='text-3xl font-serif text-blue-500' to="/">KitapEvim</Link>
+       </div>
+       <div className='absolute right-10'>
+         <DarkMode/>
+       </div>
+      <div>
+        
       </div>
+      </div>
+      
 
       {isMobile ? (
        
@@ -43,7 +53,7 @@ const Navbar = () => {
       ) : (
 
         <nav className='w-screen relative'>
-          <ul className='flex w-full justify-around sm:gap-10 lg:gap-10 items-center h-16 bg-blue-900 text-white lg:text-2xl sm:text-xl'>
+          <ul className='flex w-full justify-around sm:gap-5 gap-10 lg:gap-10 items-center h-16 bg-blue-900 text-white lg:text-2xl sm:text-xl'>
             <div className='flex gap-10 justify-center'>
               <li>
                 <Link className="navbar-link" to="/">Home</Link>
