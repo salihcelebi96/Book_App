@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <div className='w-screen '>
-      <div className='flex gap-10 px-10 h-20 items-center'>
+      <div className='flex gap-7 px-10 h-20 items-center'>
         <img  className="h-16 w-16 " src={book} alt="" />
         <Link className='text-3xl font-serif text-blue-500' to="/">KitapEvim</Link>
       </div>
