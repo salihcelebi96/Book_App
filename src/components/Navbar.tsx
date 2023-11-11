@@ -33,8 +33,8 @@ const Navbar = () => {
   return (
     <div className='w-screen'>
       <div className='flex gap-10 px-10 items-center'>
-        <img className='h-24' src={book} alt="" />
-        <Link className='text-4xl font-serif text-blue-500' to="/">KitapEvim</Link>
+        <img className='h-20 w-20' src={book} alt="" />
+        <Link className='text-3xl font-serif text-blue-500' to="/">KitapEvim</Link>
       </div>
 
       {isMobile ? (
