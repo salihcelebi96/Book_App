@@ -51,7 +51,7 @@ const Menu: React.FC = () => {
                 
                 <div>
                     <li className=''>
-                        <Link className="navbar-link" to="/iletisim">Contact</Link>
+                        <Link className="navbar-link" to="/contact">Contact</Link>
                     </li>
                 </div>
 

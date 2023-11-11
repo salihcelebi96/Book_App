@@ -21,6 +21,7 @@ const DarkMode:React.FC = () => {
       onChange={() => setIsDarkMode(!isDarkMode)}
       checked={isDarkMode}
       className='absolute  top-0 right-0'
+      
     />
   )
 }

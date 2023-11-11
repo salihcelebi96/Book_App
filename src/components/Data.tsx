@@ -128,15 +128,20 @@ const Data: React.FC<DataProps> = (props) => {
         ) : (
           <p>No results found</p>
         )}
-        <div className="w-screen flex justify-center">
-          <Stack className='' spacing={2}>
+        <div className="w-screen   flex justify-center">
+          <div className='bg-white p-2 rounded-2xl px-4'>
+          <Stack color="white" spacing={2}>
             <Pagination
               count={pageCount}
               variant="outlined"
               onChange={(_, page) => handlePageClick({ selected: page - 1 })}
+              color='primary'
+              
             />
 
           </Stack>
+          </div>
+          
         </div>
       </div>
     </div>
