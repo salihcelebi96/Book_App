@@ -128,7 +128,7 @@ const Data: React.FC<DataProps> = (props) => {
         ) : (
           <p>No results found</p>
         )}
-        <div className="w-screen   flex justify-center">
+        <div className="w-screen  fixed bottom-0  flex justify-center">
           <div className='bg-white p-2 rounded-2xl px-4'>
           <Stack color="white" spacing={2}>
             <Pagination
